@@ -1,4 +1,4 @@
-package com.henry.online_shopping.utility.constant;
+package com.henry.online_shopping.constant;
 
 public final class Constant {
 

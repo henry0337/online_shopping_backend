@@ -1,13 +1,13 @@
 package com.henry.online_shopping.config;
 
-import com.henry.online_shopping.annotation.HttpsOnly;
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
-@HttpsOnly
+@Profile("https")
 @Configuration
 public class TomcatConfig {
 

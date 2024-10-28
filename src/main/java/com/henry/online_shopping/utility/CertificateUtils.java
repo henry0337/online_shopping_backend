@@ -19,14 +19,10 @@ public final class CertificateUtils {
         final String path = System.getProperty("user.dir") + "/src/main/resources/";
         final String certName = "backend.p12";
 
-        final String command = String.format("certutil -f -importpfx %s%s Root", path, certName);
-        Process process = Runtime.getRuntime().exec(command);
-        try {
-            process.waitFor();
-            log.debug("Certificate installed successfully");
-        } catch (InterruptedException e) {
-            log.error(e.getLocalizedMessage());
-        }
+//        final String command = String.format("certutil -f -importpfx %s%s Root", path, certName);
+//        Process process = Runtime.getRuntime().exec(command);
+        ProcessBuilder builder = new ProcessBuilder("certutil", "-f", "-importpfx", path + certName, "Root");
+        builder.start();
     }
 
     /**
@@ -34,6 +30,7 @@ public final class CertificateUtils {
      * @param aliasToCheck The certificate's alias name.
      * @return {@code true} if installed, {@code false} otherwise.
      * @throws Exception if errors are occurred while interacting with target certificate.
+     * @apiNote Working only on <b>Windows</b> for the time being.
      */
     public static boolean isCertificateInstalled(String aliasToCheck) throws Exception {
         KeyStore keyStore = KeyStore.getInstance("Windows-ROOT");

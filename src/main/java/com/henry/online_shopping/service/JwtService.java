@@ -2,7 +2,7 @@ package com.henry.online_shopping.service;
 
 import com.henry.online_shopping.entity.Role;
 import com.henry.online_shopping.entity.User;
-import com.henry.online_shopping.utility.constant.Constant;
+import com.henry.online_shopping.constant.Constant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

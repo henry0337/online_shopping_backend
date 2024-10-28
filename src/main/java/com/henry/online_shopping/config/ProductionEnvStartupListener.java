@@ -1,34 +1,31 @@
 package com.henry.online_shopping.config;
 
+import com.henry.online_shopping.utility.BrowserUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Profile;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@Profile({"https"})
+@DependsOn("setup_cert")
+@Profile("https")
 public class ProductionEnvStartupListener implements ApplicationListener<ApplicationReadyEvent> {
 
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
         final String swaggerUrl = "https://localhost:8443/swagger-ui/index.html";
-        final String os = System.getProperty("os.name").toLowerCase();
-        ProcessBuilder builder = null;
+        final String hstsUrl = BrowserUtils.getDefaultBrowser() + "://net-internals/#hsts";
 
         try {
-            if (os.contains("win")) {
-                builder = new ProcessBuilder("cmd", "/c", "start", swaggerUrl);
-            } else if (os.contains("mac")) {
-                builder = new ProcessBuilder("open", swaggerUrl);
-            } else if (os.contains("nix") || os.contains("nux")) {
-                builder = new ProcessBuilder("xdg-open", swaggerUrl);
-            }
+            ProcessBuilder builder = new ProcessBuilder("cmd", "/c", "start", swaggerUrl);
+            ProcessBuilder builder1 = new ProcessBuilder("cmd", "/c", "start", hstsUrl);
 
-            assert builder != null;
             builder.start();
+            builder1.start();
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());
         }
