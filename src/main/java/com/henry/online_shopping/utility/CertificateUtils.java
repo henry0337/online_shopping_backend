@@ -19,14 +19,12 @@ public final class CertificateUtils {
         final String path = System.getProperty("user.dir") + "/src/main/resources/";
         final String certName = "backend.p12";
 
-//        final String command = String.format("certutil -f -importpfx %s%s Root", path, certName);
-//        Process process = Runtime.getRuntime().exec(command);
         ProcessBuilder builder = new ProcessBuilder("certutil", "-f", "-importpfx", path + certName, "Root");
         builder.start();
     }
 
     /**
-     * Indicate whether the certificate with the {@code aliasToCheck} alias was installed in the certificate store or not.
+     * Indicate whether the certificate with the {@code aliasToCheck} alias was installed in the Trusted Root certificate store or not.
      * @param aliasToCheck The certificate's alias name.
      * @return {@code true} if installed, {@code false} otherwise.
      * @throws Exception if errors are occurred while interacting with target certificate.

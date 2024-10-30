@@ -1,9 +1,9 @@
 package com.henry.online_shopping.service;
 
-import com.henry.online_shopping.dto.AuthResponse;
-import com.henry.online_shopping.dto.ChangePasswordRequest;
-import com.henry.online_shopping.dto.LoginRequest;
-import com.henry.online_shopping.dto.RegisterRequest;
+import com.henry.online_shopping.dto.response.AuthResponse;
+import com.henry.online_shopping.dto.request.ChangePasswordRequest;
+import com.henry.online_shopping.dto.request.LoginRequest;
+import com.henry.online_shopping.dto.request.RegisterRequest;
 import com.henry.online_shopping.entity.User;
 import com.henry.online_shopping.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @Profile({"http"})
-public class DevelopmentEnvStartupListener implements ApplicationListener<ApplicationReadyEvent> {
+public class HttpStartupListener implements ApplicationListener<ApplicationReadyEvent> {
 
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {

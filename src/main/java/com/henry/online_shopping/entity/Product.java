@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Data
@@ -34,8 +33,10 @@ public class Product {
     private List<Integer> size;
 
     @ManyToOne
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
     private Seller seller;
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @DependsOn("setup_cert")
 @Profile("https")
-public class ProductionEnvStartupListener implements ApplicationListener<ApplicationReadyEvent> {
+public class HttpsStartupListener implements ApplicationListener<ApplicationReadyEvent> {
 
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {

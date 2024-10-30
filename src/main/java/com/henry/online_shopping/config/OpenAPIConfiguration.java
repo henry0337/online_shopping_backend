@@ -1,5 +1,6 @@
 package com.henry.online_shopping.config;
 
+import com.henry.online_shopping.constant.OpenAPIConstant;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -13,8 +14,8 @@ public class OpenAPIConfiguration {
     @Bean
     public OpenAPI customizeOpenAPI() {
         return new OpenAPI()
-                .openapi("3.1.0")
-                .info(new Info().title("Online Shopping").version("1.0"))
+                .openapi(OpenAPIConstant.VERSION)
+                .info(new Info().title(OpenAPIConstant.TITLE).version(OpenAPIConstant.API_VERSION))
                 .components(new Components().addSecuritySchemes(
                         "Bearer Token",
                         new SecurityScheme()

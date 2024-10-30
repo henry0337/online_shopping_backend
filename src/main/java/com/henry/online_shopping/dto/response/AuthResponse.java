@@ -1,4 +1,4 @@
-package com.henry.online_shopping.dto;
+package com.henry.online_shopping.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

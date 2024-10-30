@@ -2,7 +2,7 @@ package com.henry.online_shopping.service;
 
 import com.henry.online_shopping.entity.Role;
 import com.henry.online_shopping.entity.User;
-import com.henry.online_shopping.constant.Constant;
+import com.henry.online_shopping.constant.JwtConstant;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -72,7 +72,7 @@ public class JwtService {
 
     @NonNull
     private SecretKey getSignInKey() {
-        byte[] key = Decoders.BASE64.decode(Constant.RAW_TOKEN);
+        byte[] key = Decoders.BASE64.decode(JwtConstant.RAW_TOKEN);
         return Keys.hmacShaKeyFor(key);
     }
 

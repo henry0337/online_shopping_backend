@@ -21,8 +21,16 @@ public class CategoryService {
         return repository.findAll();
     }
 
+    public boolean existsById(int id) {
+        return repository.existsById(id);
+    }
+
+    public boolean existsByName(String name) {
+        return repository.existsByName(name);
+    }
+
     public Category getById(int id) {
-        return repository.findById(id).orElseThrow();
+        return repository.findById(id).orElse(null);
     }
 
     public Category insert(Category category) {
