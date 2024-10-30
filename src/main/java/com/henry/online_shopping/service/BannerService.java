@@ -25,7 +25,7 @@ public class BannerService {
     }
 
     public boolean existsByUri(String uri) {
-        return repository.existsByUri(uri);
+        return repository.existsByUrl(uri);
     }
 
     public Banner getById(int id) {

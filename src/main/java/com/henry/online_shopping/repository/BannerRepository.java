@@ -4,5 +4,5 @@ import com.henry.online_shopping.entity.Banner;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BannerRepository extends JpaRepository<Banner, Integer> {
-    boolean existsByUri(String uri);
+    boolean existsByUrl(String url);
 }

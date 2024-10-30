@@ -35,6 +35,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(route -> route
                         .requestMatchers(
                                 "/api/v1/auth/**",
+                                "/api/v1/banner/**",
+                                "/api/v1/category/**",
+                                "/api/v1/product/**",
+                                "/api/v1/seller/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**"
                         ).permitAll()
@@ -42,6 +46,7 @@ public class SecurityConfiguration {
                                 "/api/v1/auth/userInfo",
                                 "/api/v1/auth/changePassword"
                         ).hasAnyRole(Role.ADMIN.name(), Role.USER.name())
+                        .requestMatchers("/api/v1/user/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
