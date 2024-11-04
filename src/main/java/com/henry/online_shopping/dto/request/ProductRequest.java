@@ -10,6 +10,7 @@ public class ProductRequest {
     private String description;
     private double price;
     private double rating;
+    private List<String> images;
     private List<Integer> size;
     private int categoryId;
     private int sellerId;

@@ -51,7 +51,7 @@ public class AuthService {
     }
 
     @Nullable
-    public Object changePassword(@NonNull ChangePasswordRequest body) {
+    public AuthResponse changePassword(@NonNull ChangePasswordRequest body) {
         String token, refreshToken;
         String email = body.getEmail();
         User user = userRepository.findByEmail(email).orElse(null);

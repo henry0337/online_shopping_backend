@@ -11,7 +11,7 @@ public class ShutdownListener implements ApplicationListener<ContextClosedEvent>
     @Override
     public void onApplicationEvent(@NonNull ContextClosedEvent event) {
         // Make sure any JVM instances or service (like OpenJDK Platform Binary you may see in Task Manager)
-        // will shutdown in any circumstances
+        // that be used to load project will shutdown in any circumstances
         System.exit(0);
     }
 }

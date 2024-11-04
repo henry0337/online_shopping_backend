@@ -3,7 +3,7 @@ package com.henry.online_shopping.constant;
 public final class OpenAPIConstant {
 
     /**
-     * The OpenAPI Specification version you want to use.
+     * The <b>OpenAPI Specification</b> version you want to use.
      * @see <a href="https://github.com/OAI/OpenAPI-Specification/tree/main/versions">OAS Version</a>
      */
     public static final String VERSION = "3.1.1";

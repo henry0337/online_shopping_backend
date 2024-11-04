@@ -55,6 +55,16 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+tasks.compileJava {
+	options.compilerArgs.addAll(
+		mutableListOf(
+			"-Amapstruct.suppressGeneratorTimestamp=true",
+			"-Amapstruct.suppressGeneratorVersionInfoComment=true",
+			"-Amapstruct.verbose=true"
+		)
+	)
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }

@@ -30,6 +30,8 @@ public class Product {
     @Column(nullable = false)
     private double rating;
 
+    private List<String> images;
+
     private List<Integer> size;
 
     @ManyToOne

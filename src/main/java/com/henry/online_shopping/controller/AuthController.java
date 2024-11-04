@@ -59,8 +59,8 @@ public class AuthController {
      *
      * @param token The token to be used for decoding.
      * @return User credentials if it can be found and obtained after decoding, otherwise <code>null</code>.
-     * @apiNote I highly recommend that you should test this method by using <b>Postman</b>, not by using <b>Swagger UI</b>. <br>
-     * But if you want to try <b>Swagger UI</b> for this, please do not use the <code>token</code> parameter, instead, you can use <code>Bearer Token</code>
+     * @apiNote I highly recommend that you should test this method by using <b>Postman</b>, not by using <b>Swagger</b>. <br>
+     * But if you want to try <b>Swagger</b> for this, please do not use the <code>token</code> parameter, instead, you can use <code>Bearer Token</code>
      * field to fill your token, that one will work as expected.
      */
     @GetMapping("/userInfo")
@@ -84,18 +84,17 @@ public class AuthController {
      */
     @PostMapping("/changePassword")
     @ResponseStatus(HttpStatus.OK)
-    public Object changePassword(@RequestBody ChangePasswordRequest request) {
+    public AuthResponse changePassword(@RequestBody ChangePasswordRequest request) {
         return authService.changePassword(request);
     }
 
     private String extractJwtTokenFromSecurityContext() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Phong cách viết dạng "Pattern Matching for `instanceof`" của Java 14
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
             return jwtAuth.getToken().getTokenValue();
         }
-        log.warn("SecurityContext did not find any token. Did you forgot using this \"Bearer Token\" field ?");
+        log.warn("SecurityContext did not find any token. Did you forget using that \"Bearer Token\" field ?");
         throw new IllegalStateException("SecurityContext doesn't contain any token");
     }
 }

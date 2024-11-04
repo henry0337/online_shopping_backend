@@ -40,6 +40,7 @@ public class ProductService {
             newProduct.setName(product.getName());
             newProduct.setPrice(product.getPrice());
             newProduct.setRating(product.getRating());
+            newProduct.setImages(product.getImages());
             newProduct.setSize(product.getSize());
             newProduct.setCategory(product.getCategory());
             newProduct.setSeller(product.getSeller());

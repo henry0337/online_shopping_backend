@@ -41,7 +41,7 @@ public class ProductController {
     )
     @ResponseStatus(HttpStatus.CREATED)
     public Product insert(@NonNull @RequestBody ProductRequest request) {
-        Product product = mapper.dtoToModel(request);
+        Product product = mapper.requestToModel(request);
         return service.insert(product);
     }
 
@@ -50,8 +50,9 @@ public class ProductController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Product> update(@PathVariable int id, @RequestBody Product product) {
+    public ResponseEntity<Product> update(@PathVariable int id, @RequestBody ProductRequest request) {
         if (!service.existsById(id)) return ResponseEntity.notFound().build();
+        Product product = mapper.requestToModel(request);
         return ResponseEntity.ok(service.update(id, product));
     }
 
