@@ -14,7 +14,7 @@ import java.util.List;
 
 @Setter
 @Builder
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Entity(name = "users")
 public class User implements UserDetails {
@@ -33,6 +33,8 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    private String avatar;
 
     @JsonIgnore
     @Getter
@@ -65,18 +67,18 @@ public class User implements UserDetails {
 
     @Getter
     @JsonIgnore
+    @Builder.Default
     @Temporal(TemporalType.TIMESTAMP)
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(updatable = false, nullable = false)
-    @Builder.Default
     private Date createdAt = new Date();
 
     @Getter
     @JsonIgnore
+    @Builder.Default
     @Temporal(TemporalType.TIMESTAMP)
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(insertable = false)
-    @Builder.Default
     private Date updatedAt = new Date();
 
     @Override

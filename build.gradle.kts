@@ -1,11 +1,11 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.3.4"
+	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.6"
 }
 
-group = "com.henry"
-version = "0.0.1-SNAPSHOT"
+group = providers.gradleProperty("group").get()
+version = providers.gradleProperty("version").get()
 
 java {
 	toolchain {
@@ -49,22 +49,20 @@ dependencies {
 
 	// Swagger UI
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
-
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.security:spring-security-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-tasks.compileJava {
-	options.compilerArgs.addAll(
-		mutableListOf(
-			"-Amapstruct.suppressGeneratorTimestamp=true",
-			"-Amapstruct.suppressGeneratorVersionInfoComment=true",
-			"-Amapstruct.verbose=true"
+tasks {
+	compileJava {
+		options.compilerArgs.addAll(
+			mutableListOf(
+				"-Amapstruct.suppressGeneratorTimestamp=true",
+				"-Amapstruct.suppressGeneratorVersionInfoComment=true",
+				"-Amapstruct.verbose=true"
+			)
 		)
-	)
-}
+	}
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+	withType<Test> {
+		useJUnitPlatform()
+	}
 }

@@ -14,9 +14,21 @@ public class HttpsStartupListener implements ApplicationListener<ApplicationRead
 
     @Override
     public void onApplicationEvent(@NonNull ApplicationReadyEvent event) {
+
+        final String swaggerUrl = "https://localhost:8443/swagger-ui/index.html";
+        final String os = System.getProperty("os.name").toLowerCase();
+        ProcessBuilder builder = null;
+
         try {
-            final String swaggerUrl = "https://localhost:8443/swagger-ui/index.html";
-            ProcessBuilder builder = new ProcessBuilder("cmd", "/c", "start", swaggerUrl);
+            if (os.contains("win")) {
+                builder = new ProcessBuilder("cmd", "/c", "start", swaggerUrl);
+            } else if (os.contains("mac")) {
+                builder = new ProcessBuilder("open", swaggerUrl);
+            } else if (os.contains("nix") || os.contains("nux")) {
+                builder = new ProcessBuilder("xdg-open", swaggerUrl);
+            }
+
+            assert builder != null;
             builder.start();
         } catch (Exception e) {
             log.error(e.getLocalizedMessage());

@@ -35,21 +35,14 @@ public class ProductController {
         return service.existsById(id) ? ResponseEntity.ok(body) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product insert(@NonNull @RequestBody ProductRequest request) {
         Product product = mapper.requestToModel(request);
         return service.insert(product);
     }
 
-    @PutMapping(
-            value = "/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable int id, @RequestBody ProductRequest request) {
         if (!service.existsById(id)) return ResponseEntity.notFound().build();
         Product product = mapper.requestToModel(request);

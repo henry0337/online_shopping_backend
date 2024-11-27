@@ -40,13 +40,14 @@ public class SecurityConfiguration {
                                 "/api/v1/product/**",
                                 "/api/v1/seller/**",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
+                                "/v3/api-docs/**",
+                                "/api/v1/user/**"
                         ).permitAll()
                         .requestMatchers(
                                 "/api/v1/auth/userInfo",
                                 "/api/v1/auth/changePassword"
                         ).hasAnyRole(Role.ADMIN.name(), Role.USER.name())
-                        .requestMatchers("/api/v1/user/**").hasRole(Role.ADMIN.name())
+//                        .requestMatchers("/api/v1/user/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))

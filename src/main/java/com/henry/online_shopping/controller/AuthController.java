@@ -79,8 +79,9 @@ public class AuthController {
     }
 
     /**
-     * Gửi yêu cầu thay đổi mật khẩu của người dùng lên máy chủ.
-     * @return Token mới sau khi đổi mật khẩu.
+     * Send the change password request into server.
+     * @param request Information about new credential
+     * @return The latest token after a successfully response.
      */
     @PostMapping("/changePassword")
     @ResponseStatus(HttpStatus.OK)
@@ -94,7 +95,7 @@ public class AuthController {
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
             return jwtAuth.getToken().getTokenValue();
         }
-        log.warn("SecurityContext did not find any token. Did you forget using that \"Bearer Token\" field ?");
+        log.warn("SecurityContext did not find any token. Did you forget using \"Bearer Token\" field ?");
         throw new IllegalStateException("SecurityContext doesn't contain any token");
     }
 }

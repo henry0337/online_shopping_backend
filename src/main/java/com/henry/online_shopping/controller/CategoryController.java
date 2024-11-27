@@ -33,20 +33,13 @@ public class CategoryController {
         return service.existsById(id) ? ResponseEntity.ok(body) : ResponseEntity.notFound().build();
     }
 
-    @PostMapping(
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PostMapping
     public ResponseEntity<Category> insert(@NonNull @RequestBody Category category) {
         if (service.existsByName(category.getName())) return ResponseEntity.badRequest().build();
         return new ResponseEntity<>(service.insert(category), HttpStatus.CREATED);
     }
 
-    @PutMapping(
-            value = "/{id}",
-            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE},
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+    @PutMapping("/{id}")
     public ResponseEntity<Category> update(@PathVariable int id, @RequestBody Category category) {
         if (!service.existsById(id)) return ResponseEntity.notFound().build();
         if (service.existsByName(category.getName())) return ResponseEntity.badRequest().build();
