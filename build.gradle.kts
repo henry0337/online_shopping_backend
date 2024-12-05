@@ -1,6 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.3.5"
+	id("org.springframework.boot") version "3.4.0"
 	id("io.spring.dependency-management") version "1.1.6"
 }
 
@@ -47,8 +47,8 @@ dependencies {
 	implementation("org.mapstruct:mapstruct:1.6.2")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.6.2")
 
-	// Swagger UI
-	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+	// Swagger
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0")
 }
 
 tasks {

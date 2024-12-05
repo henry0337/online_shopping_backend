@@ -7,18 +7,19 @@ import org.springframework.lang.NonNull;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository repository;
 
-    public User findByEmail(String email) {
-        return repository.findByEmail(email).orElseThrow();
+    public List<User> getAll() {
+        return repository.findAll();
     }
 
-    @NonNull
-    public final UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService() {
         return username -> repository.findByEmail(username).orElseThrow();
     }
 }

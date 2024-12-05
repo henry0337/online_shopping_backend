@@ -2,7 +2,9 @@ package com.henry.online_shopping.utility;
 
 import com.henry.online_shopping.entity.User;
 import com.henry.online_shopping.repository.UserRepository;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,12 +14,12 @@ import java.util.List;
 import static com.henry.online_shopping.entity.Role.ADMIN;
 import static com.henry.online_shopping.entity.Role.USER;
 
-// You may need this if you're about to create admin page for monitoring application.
 @Configuration
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class DataPreloader implements CommandLineRunner {
 
-    private final UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
     public void run(String... args) {
