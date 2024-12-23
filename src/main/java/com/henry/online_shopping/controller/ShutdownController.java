@@ -1,9 +1,6 @@
 package com.henry.online_shopping.controller;
 
 import com.henry.online_shopping.annotation.OneLineMapping;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +9,9 @@ public class ShutdownController {
 
     /**
      * Enables an utility <b>Shutdown URL</b> for the server. <br>
-     * (Inspired by <a href="https://ktor.io/">Ktor</a> project.)
+     * (Inspired by <b>Ktor</b> framework.)
+     *
+     * @see <a href="https://ktor.io/">Ktor</a>
      */
     @OneLineMapping(
             method = RequestMethod.POST,

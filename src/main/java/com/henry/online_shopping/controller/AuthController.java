@@ -5,6 +5,7 @@ import com.henry.online_shopping.dto.response.AuthResponse;
 import com.henry.online_shopping.dto.request.ChangePasswordRequest;
 import com.henry.online_shopping.dto.request.LoginRequest;
 import com.henry.online_shopping.dto.request.RegisterRequest;
+import com.henry.online_shopping.dto.response.UserResponse;
 import com.henry.online_shopping.entity.User;
 import com.henry.online_shopping.service.AuthService;
 import com.henry.online_shopping.service.JwtService;
@@ -37,7 +38,7 @@ public class AuthController {
      */
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public User register(@RequestBody RegisterRequest request) {
+    public UserResponse register(@RequestBody RegisterRequest request) {
         return authService.register(request);
     }
 
@@ -92,8 +93,9 @@ public class AuthController {
 
         if (authentication instanceof JwtAuthenticationToken jwtAuth) {
             return jwtAuth.getToken().getTokenValue();
+        } else {
+            log.warn("SecurityContext did not find any token. Did you forget using \"Bearer Token\" field ?");
+            throw new IllegalStateException("SecurityContext doesn't contain any token");
         }
-        log.warn("SecurityContext did not find any token. Did you forget using \"Bearer Token\" field ?");
-        throw new IllegalStateException("SecurityContext doesn't contain any token");
     }
 }

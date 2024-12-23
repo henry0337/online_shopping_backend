@@ -18,13 +18,13 @@ import java.lang.annotation.*;
  * It will be the same with this block of code:
  * <pre><code>
  * {@code @RestController}
- * {@code @ResponseStatus(HttpStatus.OK)}
+ * {@code @RequestMapping("/api/v1/example")}
  * {@code @Tag(name = "", description = "")}
  * public class Example {}
  * </code></pre>
  * <br>
  * <b>Note:</b> I'm using custom annotations for faster annotation applying, (sometimes) not for optimizing. <br>
- * So if you don't want to use this custom annotation, feel free to create one for your own, or simpler, skipping it :v.
+ * So if you don't want to use this custom annotation, feel free creating one for your own, or simpler, skipping it :v.
  */
 @RestController
 @RequestMapping

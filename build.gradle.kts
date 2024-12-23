@@ -1,7 +1,8 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.4.0"
+	id("org.springframework.boot") version "3.4.1"
 	id("io.spring.dependency-management") version "1.1.6"
+	id("org.graalvm.buildtools.native") version "0.10.3"
 }
 
 group = providers.gradleProperty("group").get()
@@ -54,15 +55,11 @@ dependencies {
 tasks {
 	compileJava {
 		options.compilerArgs.addAll(
-			mutableListOf(
+			listOf(
 				"-Amapstruct.suppressGeneratorTimestamp=true",
 				"-Amapstruct.suppressGeneratorVersionInfoComment=true",
 				"-Amapstruct.verbose=true"
 			)
 		)
-	}
-
-	withType<Test> {
-		useJUnitPlatform()
 	}
 }

@@ -4,7 +4,9 @@ import com.henry.online_shopping.dto.response.AuthResponse;
 import com.henry.online_shopping.dto.request.ChangePasswordRequest;
 import com.henry.online_shopping.dto.request.LoginRequest;
 import com.henry.online_shopping.dto.request.RegisterRequest;
+import com.henry.online_shopping.dto.response.UserResponse;
 import com.henry.online_shopping.entity.User;
+import com.henry.online_shopping.mapper.UserMapper;
 import com.henry.online_shopping.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -24,26 +26,23 @@ import java.util.Objects;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AuthService {
 
-    UserRepository userRepository;
+    UserRepository repository;
     PasswordEncoder encoder;
     AuthenticationManager manager;
     JwtService jwtService;
+    UserMapper mapper;
 
-    public User register(@NonNull RegisterRequest request) {
-        User user = User.builder()
-                .email(request.getEmail())
-                .password(encoder.encode(request.getPassword()))
-                .name(request.getName())
-                .role(request.getRole())
-                .build();
-
-        return userRepository.save(user);
+    public UserResponse register(@NonNull RegisterRequest request) {
+        UserResponse response = mapper.requestToDto(request);
+        User user = mapper.responseToModel(response);
+        repository.save(user);
+        return response;
     }
 
     public AuthResponse login(@NonNull LoginRequest body) {
         manager.authenticate(new UsernamePasswordAuthenticationToken(body.getEmail(), body.getPassword()));
 
-        User user = userRepository.findByEmail(body.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = repository.findByEmail(body.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         String jwt = jwtService.generateTokenWithUserInfo(user);
         String refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
 
@@ -53,15 +52,15 @@ public class AuthService {
     public AuthResponse changePassword(@NonNull ChangePasswordRequest body) {
         String token, refreshToken;
         String email = body.getEmail();
-        User user = userRepository.findByEmail(email).orElse(null);
+        User user = repository.findByEmail(email).orElse(null);
 
         if (user == null
-                || !Objects.equals(body.getRepeatedPassword(), body.getNewPassword()) // Password doesn't equal with repeated password
-                || encoder.matches(body.getNewPassword(), user.getPassword())) // If the current account's password equals the password you have just typed
+                || !Objects.equals(body.getRepeatedPassword(), body.getNewPassword()) // Repeated password doesn't equal with password field.
+                || encoder.matches(body.getNewPassword(), user.getPassword())) // Uh... Maybe you found your lost password :v
             return null;
 
         user.setPassword(encoder.encode(body.getNewPassword()));
-        userRepository.save(user);
+        repository.save(user);
 
         token = jwtService.generateTokenWithUserInfo(user);
         refreshToken = jwtService.generateRefreshToken(new HashMap<>(), user);
